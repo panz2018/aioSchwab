@@ -50,13 +50,19 @@ Sync the environment with the pyproject.toml:
 uv sync
 ```
 
-#### Create and Use Virtual Environments
-
-Create a new virtual environment:
+#### Check packages available for update
 
 ```sh
-uv venv .venv
+uv pip list --outdated
 ```
+
+#### Upgrade packages
+
+```sh
+uv pip upgrade
+```
+
+### Manage virtual environment
 
 #### Activate the virtual environment
 
@@ -80,18 +86,6 @@ which python
 
 ```sh
 python --version
-```
-
-#### Check packages available for update
-
-```sh
-uv pip list --outdated
-```
-
-#### Upgrade packages
-
-```sh
-uv pip upgrade
 ```
 
 #### Deactivate a virtual environment
