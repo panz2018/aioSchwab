@@ -8,4 +8,5 @@ dependencies = [
     "httpx>=0.28.1",
     "ipykernel>=7.0.1",
     "jupyter>=1.1.1",
+    "websockets>=15.0.1",
 ]

@@ -96,3 +96,12 @@ python --version
 # On MacOS/Linux:
 deactivate
 ```
+
+## Schwab Developer Portal
+
+- Create a [Schwab developer account] (https://developer.schwab.com/). Use the same email as in your Schwab brokerage account.
+- Apply for "Trader API - Individual".
+- Create a new App
+  - Add both API products to the app: "Accounts and Trading Production" and "Market Data Production".
+  - Use callbak url "https://127.0.0.1".
+- Wait until the app status is "Ready for use" (this can take a couple days), note that "Approved - Pending" will not work.
