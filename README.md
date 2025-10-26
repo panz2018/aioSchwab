@@ -9,6 +9,9 @@
 `uv` is a fast Python package installer and virtual environment manager. You can install `uv` by running the following command:
 
 ```sh
+# On Windows:
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+# On MacOS/Linux:
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
@@ -54,12 +57,6 @@ uv sync
 
 ```sh
 uv pip list --outdated
-```
-
-#### Upgrade packages
-
-```sh
-uv pip upgrade
 ```
 
 ### Manage virtual environment
