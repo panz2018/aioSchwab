@@ -1,10 +1,12 @@
 """
 Project: https://github.com/panz2018/aioSchwab
+
+aioSchwab Tokens
+----------------
+Handles OAuth authorization and token retrieval using the Base HTTP client.
 """
 
-from .BaseClient import BaseClient
-
-BaseClient.base_url = r"https://api.schwabapi.com/"
+from .Base import Base
 
 
 class Tokens:
@@ -14,13 +16,26 @@ class Tokens:
         app_secret: str,
         callback_url: str,
     ):
-        callback_url = callback_url.rstrip("/")
-        self._validate_input(app_key, app_secret, callback_url)
+        """
+        Initialize the token manager.
 
+        Args:
+            app_key: Schwab app key credential.
+            app_secret: Schwab app secret credential.
+            callback_url: Redirect URI registered with Schwab API.
+            base: Optional shared `Base` client instance.
+        """
         self._app_key = app_key  # app key credential
         self._app_secret = app_secret  # app secret credential
-        self._callback_url = callback_url  # callback url to use
+        self._callback_url = callback_url.rstrip("/")  # callback url to use
 
+        self._validate_input(self._app_key, self._app_secret, self._callback_url)
+
+        self.client = Base("https://api.schwabapi.com/")
+
+    # -------------------------------------------------------------------------
+    # Validation
+    # -------------------------------------------------------------------------
     @staticmethod
     def _validate_input(
         app_key: str,
@@ -33,6 +48,7 @@ class Tokens:
         Args:
             app_key (str): App key credentials.
             app_secret (str): App secret credentials.
+            callback_url (str): Callback URL registered with Schwab API.
 
         Raises:
             ValueError: If any validation checks fail.
@@ -54,11 +70,19 @@ class Tokens:
         if callback_url.endswith("/"):
             raise Exception('[aioSchwab] Callback URL cannot be path (ends with "/").')
 
+    # -------------------------------------------------------------------------
+    # Authorization
+    # -------------------------------------------------------------------------
     def auth_url(self) -> str:
+        """
+        Generate the authorization URL that the user must visit to grant access.
+
+        Returns:
+            The OAuth2 authorization URL.
+        """
         # get and open the link that the user will authorize with.
-        auth_url = (
+        return (
             f"https://api.schwabapi.com/v1/oauth/authorize"
             f"?client_id={self._app_key}"
             f"&redirect_uri={self._callback_url}"
         )
-        return auth_url
