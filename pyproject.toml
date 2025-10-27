@@ -1,7 +1,7 @@
 [project]
 name = "aioschwab"
 version = "0.0.0"
-description = "Asynchronous HTTP python framework for Schwab Individual Trader API"
+description = "Simple asynchronous HTTP python framework for Schwab Individual Trader API at server side"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
